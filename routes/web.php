@@ -28,7 +28,7 @@ Route::post('/register/step1', [RegisterController::class,'processStep1']);
 Route::get('/register/step2', [RegisterController::class,'showStep2Form'] )->name('register.step2');
 Route::post('/register/step2', [RegisterController::class,'register'] );
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\UserProfileController::class, 'index'])->name('home');
 
 Route::get('/acc', function(){
     return view('acceuil');
