@@ -14,12 +14,15 @@ class User extends Authenticatable
 
     protected $fillable = [
         'genre',
+        'role',
         'email',
         'password',
         'nom',
         'prenom',
         'date_de_naissance',
         'username',
+        'mobile',
+        'adresse',
     ];
 
     protected $hidden = [
@@ -30,4 +33,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class, 'utilisateur_id');
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class,'user_id');
+    }
 }

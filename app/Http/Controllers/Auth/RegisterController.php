@@ -21,13 +21,11 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
-    // Step 1: Show the first step registration form
     public function showStep1Form()
     {
         return view('auth.register_step1');
     }
 
-    // Step 1: Process the first step registration form
     public function processStep1(Request $request)
     {
         $request->validate([
@@ -44,13 +42,11 @@ class RegisterController extends Controller
         return redirect(route('register.step2'));
     }
 
-    // Step 2: Show the second step registration form
     public function showStep2Form()
     {
         return view('auth.register_step2');
     }
 
-    // Final step: Complete the registration
     protected function register(Request $request)
     {
         $request->validate([

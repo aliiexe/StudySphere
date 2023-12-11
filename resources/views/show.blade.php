@@ -19,7 +19,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div>
-                <img class="w-full rounded mb-4" src="{{ asset('images/' . $course->image) }}" alt="{{ $course->title }}">
+                <img class="w-full rounded mb-4" src="{{ asset('storage/' . $course->image) }}" alt="{{ $course->title }}">
             </div>
             
             <div>
@@ -40,6 +40,7 @@
                     <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
                         Download Course
                     </button>
+                    
                 </form>
             </div>
         </div>
@@ -183,10 +184,10 @@
     </script>
 
 </body>
-</html>
+</html> --}}
 
 
-
+{{--
 <!DOCTYPE html>
 <html lang="en">
 <head>

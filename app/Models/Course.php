@@ -13,6 +13,7 @@ class Course extends Model
         'title', 'image', 'sub_description', 'description', 'school',
         'domaine_id', 'duree_du_cours', 'pdf_file', 'rating', 'avg_rating',
     ];
+    
 
     public function fieldOfStudy()
     {

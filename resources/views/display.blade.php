@@ -1,5 +1,3 @@
-<!-- resources/views/courses/index.blade.php -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course Listing</title>
 
-    <!-- Include the Tailwind CSS file -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="font-sans bg-gray-100">
@@ -15,7 +12,6 @@
 <div class="container mx-auto p-8">
     <h2 class="text-3xl text-center text-blue-500 mb-8">Course Listing</h2>
 
-    
     <a href="{{ route('create') }}" class="bg-blue-500 text-white py-2 px-4 rounded inline-block mb-4 hover:bg-blue-700 transition-all duration-300">
         Add a Course
     </a>
@@ -47,8 +43,8 @@
                 <a href="{{ route('show', $course->id) }}" class="hover:no-underline">
                     <div class="bg-white border border-gray-300 p-2 rounded-lg transition-transform transform hover:scale-105 course-card"
                          data-field-of-study="{{ strtolower($course->field_of_study) }}">
-                        <img src="{{ asset('images/'.$course->image) }}" alt="{{ $course->title }}" class="w-full h-40 object-cover mb-4 rounded">
-                        <p class="text-gray-600 mb-2"> {{ $course->school }}</p>
+                         <img src="{{ asset("storage/{$course->image}") }}" alt="{{ $course->title }} Image">
+                         <p class="text-gray-600 mb-2"> {{ $course->school }}</p>
                         <h3 class="text-lg font-semibold mb-2">{{ $course->title }}</h3>
                         <p class="text-gray-600 mb-2">{{ $course->sub_description }}</p>
                         <div class="flex items-center mb-2">
@@ -59,7 +55,6 @@
                         </div>
                         <div class="flex items-center justify-between">
                             <p class="text-gray-600 mb-2">
-                                <!-- Display the nom from the related DomaineEtude -->
                                 {{ $course->fieldOfStudy->nom }}
                             </p>
                             <p class="text-gray-600 mb-2">{{ $course->duree_du_cours }}</p>
