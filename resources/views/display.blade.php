@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course Listing</title>
-
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="font-sans bg-gray-100">
@@ -40,13 +39,13 @@
     @if(count($courses) > 0)
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             @foreach($courses as $course)
-                <a href="{{ route('show', $course->id) }}" class="hover:no-underline">
-                    <div class="bg-white border border-gray-300 p-2 rounded-lg transition-transform transform hover:scale-105 course-card"
-                         data-field-of-study="{{ strtolower($course->field_of_study) }}">
-                         <img src="{{ asset("storage/{$course->image}") }}" alt="{{ $course->title }} Image">
-                         <p class="text-gray-600 mb-2"> {{ $course->school }}</p>
-                        <h3 class="text-lg font-semibold mb-2">{{ $course->title }}</h3>
-                        <p class="text-gray-600 mb-2">{{ $course->sub_description }}</p>
+        <a href="{{ route('show', $course->id) }}" class="hover:no-underline">
+            <div class="bg-white border border-gray-300 p-2 rounded-lg transition-transform transform hover:scale-105 course-card"
+                 data-field-of-study="{{ strtolower($course->field_of_study) }}">
+                 <img src="{{ asset("storage/{$course->image}") }}" alt="{{ $course->title }} Image" class="w-full h-40 object-cover">
+                 <p class="text-gray-600 mb-2 whitespace-normal course-school">{{ $course->school }}</p>
+                <h3 class="text-lg font-semibold mb-2">{{ $course->title }}</h3>
+                <p class="text-gray-600 mb-2 whitespace-normal p-element max-h-16 overflow-hidden">{{ $course->sub_description }}</p>
                         <div class="flex items-center mb-2">
                             <p class="text-gray-600 mr-2">{{ $course->avg_rating }}</p>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#007bff" class="h-4 w-4" viewBox="0 0 24 24">

@@ -172,3 +172,23 @@ body, html {
     font-weight: 700;
     text-decoration: none;
 }
+
+@media only screen and (max-width: 600px) {
+    .maincontainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .container2 {
+        display: none; /* Hide the image container on smaller screens */
+    }
+
+    .container1 {
+        width: 100%; /* Take up full width on smaller screens */
+    }
+
+    .container1 .logo {
+        text-align: center; /* Center the logo on smaller screens */
+    }
+}

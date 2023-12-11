@@ -16,10 +16,10 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     Statique
                 </a>
-                <a class="nav-link" href="{{ route('liste_courses') }}">
+                {{-- <a class="nav-link" href="{{ route('liste_courses') }}">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     Liste Courses
-                </a>
+                </a> --}}
                 <div class="sb-sidenav-menu-heading">ADDONS</div>
                 <a class="nav-link" href="{{ route('chart') }}">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>

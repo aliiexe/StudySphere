@@ -59,11 +59,8 @@
 </head>
 
 <body class="mt-5">
-        {{-- <div class="container-md light-style flex-grow-1 container-p-y mb-4"> --}}
-            {{-- <div class="custom-container light-style flex-grow-1 container-p-y mb-4"> --}}
-                <div class="custom-container light-style flex-grow-1 container-p-y mb-4">
+        <div class="custom-container light-style flex-grow-1 container-p-y mb-4">
         <img src="" alt="">
-        {{-- <div class="card overflow-hidden"> --}}
             <div class="card custom-card  ">
                 <div class="row no-gutters  row-bordered row-border-light">
                 <div class="col-md-3 pt-0 ">

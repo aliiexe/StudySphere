@@ -19,7 +19,6 @@ class ProfileController extends Controller
 
     public function mettreAJourProfile(Request $request, $id)
 {
-    // Validation des champs utilisateur
     $request->validate([
         'nom' => 'required|string',
         'prenom' => 'required|string',
@@ -57,7 +56,6 @@ class ProfileController extends Controller
 
 $profile->save();
 
-    // Redirection avec un message de succès
     return redirect()->route('profiles.create', ['id' => $id])->with('success', 'Profil mis à jour avec succès.');
 }
 
@@ -65,20 +63,17 @@ $profile->save();
 
     public function showDashboard()
     {
-        $utilisateur = auth()->user(); // Utilisateur connecté (si vous utilisez l'authentification)
+        $utilisateur = auth()->user(); 
 
         if ($utilisateur) {
             $profile = $utilisateur->profile;
 
             if ($profile) {
-                // Utilisez $profile ici
                 return view('dashboard', compact('utilisateur', 'profile'));
             } else {
-                // Le profil n'existe pas, vous pouvez gérer cela comme nécessaire
                 return view('dashboard', compact('utilisateur'))->with('warning', 'Aucun profil trouvé.');
             }
         } else {
-            // L'utilisateur n'est pas connecté, redirigez-le vers la page de connexion par exemple
             return redirect()->route('login');
         }
     }

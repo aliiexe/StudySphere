@@ -8,6 +8,7 @@ use App\Http\Controllers\UtilisateurController;
 use App\Http\Controllers\ListePostsController;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\CoursesController;
+use App\Http\Controllers\UserProfileController;
 
 Route::get('/', function () {
     $courseController = new CourseController();
@@ -109,9 +110,12 @@ Route::get('/posts/{id}/destroy', [ListePostsController::class, 'destroy'])->nam
 
 
 
-Route::get('/liste-courses', [CoursesController::class, 'showListeCourses'])->name('liste_courses');
 
 
 Route::get('/page_profile',function(){
     return view('page_profile');
 });
+
+
+
+Route::get('/user-profile', [UserProfileController::class, 'index'])->name('user.profile');

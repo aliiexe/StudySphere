@@ -38,7 +38,6 @@ class UtilisateurController extends Controller
 
     public function mettreAJourUser(Request $request, $id)
 {
-    // Validation des champs utilisateur
     $request->validate([
         'nom' => 'required|string',
         'prenom' => 'required|string',
@@ -46,19 +45,17 @@ class UtilisateurController extends Controller
         'date_de_naissance' => 'required|date',
         'adresse' => 'nullable|string',
         'mobile' => 'nullable|numeric',
-        'genre' => 'nullable|string|in:femme,homme', // Ajoutez la validation pour le champ "genre"
-        // Ajoutez d'autres règles de validation au besoin
+        'genre' => 'nullable|string|in:femme,homme',
+        'bio' => 'nullable|string',
+        'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10000', 
     ]);
 
-    // Récupération de l'utilisateur
     $utilisateur = User::find($id);
 
-    // Vérification si l'utilisateur existe
     if (!$utilisateur) {
         return redirect()->back()->with('error', 'Utilisateur non trouvé.');
     }
 
-    // Mise à jour des champs utilisateur
     $utilisateur->update([
         'nom' => $request->input('nom'),
         'prenom' => $request->input('prenom'),
@@ -66,26 +63,21 @@ class UtilisateurController extends Controller
         'date_de_naissance' => $request->input('date_de_naissance'),
         'adresse' => $request->input('adresse'),
         'mobile' => $request->input('mobile'),
-        'genre' => $request->input('genre'),
+        'genre' => $request->filled('genre') ? $request->input('genre') : $utilisateur->genre,
     ]);
 
-        // Mise à jour ou création du profil
-        $profile = $utilisateur->profile ?? new Profile();
-        $profile->bio = $request->input('bio');
+    $profile = $utilisateur->profile ?? new Profile();
+    $profile->bio = $request->input('bio');
 
-        // Traitement de la photo (à adapter selon votre logique)
-        if ($request->hasFile('photo')) {
-            $photoPath = $request->file('photo')->store('photos', 'public');
-            $profile->photo = $photoPath;
-        }
-
-        $profile->save();
-
-        // Redirection avec un message de succès
-        return redirect()->route('profiles.create', ['id' => $id])->with('success', 'Profil mis à jour avec succès.');
+    if ($request->hasFile('photo')) {
+        $photoPath = $request->file('photo')->store('images', 'public');
+        $profile->photo = $photoPath;
     }
 
-    //Supprimer Dashboard
+    $profile->save();
+
+    return redirect()->route('profiles.create', ['id' => $id])->with('success', 'Profil mis à jour avec succès.');
+}
 
 
 
@@ -94,13 +86,10 @@ class UtilisateurController extends Controller
     $utilisateur = User::find($id);
 
     if ($utilisateur) {
-        // Supprimer les posts de l'utilisateur
         $utilisateur->posts()->delete();
 
-        // Supprimer le profil de l'utilisateur
         $utilisateur->profile()->delete();
 
-        // Supprimer l'utilisateur
         $utilisateur->delete();
 
         return redirect()->route('liste_utilisateurs')->with('success', 'Utilisateur et ses éléments associés supprimés avec succès.');
@@ -108,14 +97,5 @@ class UtilisateurController extends Controller
         return redirect()->route('liste_utilisateurs')->with('error', 'Utilisateur non trouvé.');
     }
 }
-
-    // public function pageStatique()
-    // {
-    //     $postsCount = Post::count(); // Remplacez cela par la logique réelle pour obtenir le nombre de posts
-
-    //     return view('static_page', ['postsCount' => $postsCount]);
-    // }
-
-    
 
 }
