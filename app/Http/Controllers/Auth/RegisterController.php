@@ -66,7 +66,9 @@ class RegisterController extends Controller
             'prenom' => $userData['prenom'],
             'date_de_naissance' => $userData['date_de_naissance'],
             'username' => $userData['username'],
+            'name' => $userData['nom'] . ' ' . $userData['prenom'],
         ]);
+        
 
         $request->session()->forget('step1_data');
 

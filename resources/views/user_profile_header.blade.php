@@ -23,13 +23,13 @@
                 </button>
             </div>
             <div class="hidden md:flex space-x-4">
-                <a href="#" class="text-black-500 font-medium hover:text-black-700">Chat</a>
+                <a href="{{route('chatify')}}" class="text-black-500 font-medium hover:text-black-700">Chat</a>
                 <a href="{{ route("display") }}" class="text-black-500 font-medium hover:text-black-700">Cours</a>
-                <a href="#" class="text-black-500 font-medium hover:text-black-700">Feed</a>
+                <a href="{{route("feeed")}}" class="text-black-500 font-medium hover:text-black-700">Feed</a>
             </div>
             <div class="flex items-center space-x-4">
                 <a href="#" class="md:hidden"></a>
-                <a href="#">
+                <a href="{{ route('profiles.create', ['id' => $user->id]) }}">
                     <img src="{{ $photoPath ? asset($photoPath) : asset('images/noprofile.png') }}" alt="User Picture" style="width: 3.75rem; height: 3.75rem;" class="object-cover rounded-full cursor-pointer">
                 </a>
                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="text-black-500 font-medium hover:text-black-700">Logout</a>
@@ -41,9 +41,9 @@
     </header>
 
     <div id="mobileMenu" class="md:hidden bg-white">
-        <a href="#" class="block py-2 px-4 text-black-500 font-medium hover:text-black-700">Chat</a>
+        <a href="{{route('chatify')}}" class="block py-2 px-4 text-black-500 font-medium hover:text-black-700">Chat</a>
         <a href="#" class="block py-2 px-4 text-black-500 font-medium hover:text-black-700">Cours</a>
-        <a href="#" class="block py-2 px-4 text-black-500 font-medium hover:text-black-700">Feed</a>
+        <a href="{{route('feeed')}}" class="block py-2 px-4 text-black-500 font-medium hover:text-black-700">Feed</a>
         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form-mobile').submit();" class="block py-2 px-4 text-black-500 font-medium hover:text-black-700">Logout</a>
         <form id="logout-form-mobile" action="{{ route('logout') }}" method="POST" style="display: none;">
             @csrf

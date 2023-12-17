@@ -76,7 +76,7 @@ class UtilisateurController extends Controller
 
     $profile->save();
 
-    return redirect()->route('profiles.create', ['id' => $id])->with('success', 'Profil mis à jour avec succès.');
+    return redirect()->route('user.profile', ['id' => $id])->with('success', 'Profil mis à jour avec succès.');
 }
 
 

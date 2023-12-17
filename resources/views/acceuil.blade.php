@@ -42,8 +42,9 @@
             <img class="img1" src="images/2.png" data-aos="zoom-out-up" data-aos-duration="1000" alt="">
 
             <div class="maintext" >
-                <p class="mainp" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300" > <span data-aos="fade-up" data-aos-duration="800" data-aos-delay="100" >Welcome</span> <br> to <span data-aos="fade-up" data-aos-duration="800" data-aos-delay="900" >Study Sphere</span> the #1 platform for international
-                    educational networking.</p>
+                <p class="mainp" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300" > 
+                    <span data-aos="fade-up" data-aos-duration="800" data-aos-delay="100" >Bienvenue</span> <br> sur <span data-aos="fade-up" data-aos-duration="800" data-aos-delay="900" >Study Sphere</span>, la plateforme n°1 pour le réseau éducatif international.</p>
+
                 <button data-aos="fade-up" data-aos-duration="800" data-aos-delay="700"><a href="{{ route('register.step1') }}">S'inscrire</a></button>
             </div>
             

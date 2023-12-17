@@ -25,7 +25,7 @@
             <p class="text-red-600">{{ session('error') }}</p>
         @endif
 
-        <form action="{{ route('store') }}" method="POST" class="bg-white p-6 rounded-md shadow-md" enctype="multipart/form-data">
+        <form action="{{ route('courses.store') }}" method="POST" class="bg-white p-6 rounded-md shadow-md" enctype="multipart/form-data">
             @csrf
 
             <div class="mb-4">

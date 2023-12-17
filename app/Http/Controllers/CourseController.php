@@ -9,16 +9,26 @@ use App\Models\User;
 use App\Models\Post;
 use Response;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+
+
+
 class CourseController extends Controller
 {
 
     public function index()
-    {
-        $courses = Course::all();
-        $fieldsOfStudy = DomaineEtudes::all();
+{
+    $courses = Course::all();
+    $fieldsOfStudy = DomaineEtudes::all();
+    $user = Auth::user();
 
-        return view('display', compact('courses', 'fieldsOfStudy'));
-    }
+    $photoPath = $user->profile && $user->profile->photo
+        ? 'storage/' . $user->profile->photo
+        : asset("images/noprofile.png");
+
+    return view('display', compact('courses', 'fieldsOfStudy', 'user', 'photoPath'));
+}
+
 
     public function filter(Request $request)
 {
@@ -30,8 +40,14 @@ class CourseController extends Controller
 
     $fieldsOfStudy = DomaineEtudes::all();
 
-    return view('display', compact('courses', 'fieldsOfStudy'));
-}
+    $user = Auth::user();
+
+    $photoPath = $user->profile && $user->profile->photo
+        ? 'storage/' . $user->profile->photo
+        : asset("images/noprofile.png");
+
+        return view('display', compact('courses', 'fieldsOfStudy', 'user', 'photoPath'));
+    }
 
     public function getUsersCount()
     {
@@ -49,12 +65,13 @@ class CourseController extends Controller
     }
 
 
-public function show($id)
-{
-    $course = Course::findOrFail($id);
-
-    return view('show', ['course' => $course]);
-}
+    public function show($id)
+    {
+        $course = Course::findOrFail($id);
+    
+        return view('show', ['course' => $course]);
+    }
+    
 
 
     public function rate(Request $request, $id)
@@ -98,10 +115,7 @@ public function download($id)
     return $pdfResponse;
 }
 
-    private function getFieldsOfStudy()
-    {
-        return DomaineEtudes::all();
-    }
+
 
 //     public function create()
 // {
@@ -143,45 +157,51 @@ public function download($id)
 //     }
 // }
 
+private function getFieldsOfStudy()
+{
+    return DomaineEtudes::all();
+}
+
 public function create()
-    {
-        // You can include any additional data needed by the form, like fields of study
-        $fieldsOfStudy = $this->getFieldsOfStudy();
+{
+    $fieldsOfStudy = $this->getFieldsOfStudy();
 
-        return view('create', ['fieldsOfStudy' => $fieldsOfStudy]);
+    return view('create', ['fieldsOfStudy' => $fieldsOfStudy]);
+}
+
+
+public function store(Request $request)
+{
+    try {
+        $request->validate([
+            'title' => 'required|string',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:8000',
+            'pdf_file' => 'required|mimes:pdf|max:10000',
+            'sub_description' => 'required|string',
+            'description' => 'required|string',
+            'school' => 'required|string',
+            'domaine_id' => 'required|exists:domaine_etudes,id',
+            'duree_du_cours' => 'required|string',
+        ]);
+
+        $imagePath = $request->file('image')->store('images', 'public');
+        $pdfPath = $request->file('pdf_file')->store('pdfs', 'public');
+
+        $requestData = $request->all();
+        $requestData['image'] = $imagePath;
+        $requestData['pdf_file'] = $pdfPath;
+
+        Course::create($requestData);
+
+        return redirect()->route('create')->with('success', 'Course created successfully!');
+    } catch (\Exception $e) {
+        Log::error("Error creating course: " . $e->getMessage());
+        Log::error("Stack trace: " . $e->getTraceAsString());
+
+        return redirect()->route('create')->with('error', 'Failed to create course.');
     }
+}
 
-    public function store(Request $request)
-    {
-        try {
-            $request->validate([
-                'title' => 'required|string',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:8192',
-                'pdf_file' => 'required|mimes:pdf|max:10000',
-                'sub_description' => 'required|string',
-                'description' => 'required|string',
-                'school' => 'required|string',
-                'domaine_id' => 'required|exists:domaine_etudes,id',
-                'duree_du_cours' => 'required|string',
-            ]);
-
-            $imagePath = $request->file('image')->store('images', 'public');
-            $pdfPath = $request->file('pdf_file')->store('pdfs', 'public');
-
-            $requestData = $request->all();
-            $requestData['image'] = $imagePath;
-            $requestData['pdf_file'] = $pdfPath;
-
-            Course::create($requestData);
-
-            return redirect()->route('create')->with('success', 'Course created successfully!');
-        } catch (\Exception $e) {
-            \Log::error("Error creating course: " . $e->getMessage());
-            \Log::error("Stack trace: " . $e->getTraceAsString());
-
-            return redirect()->route('create')->with('error', 'Failed to create course.');
-        }
-    }
 
 
 }

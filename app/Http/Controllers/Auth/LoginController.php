@@ -15,7 +15,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/user_profile_header';
+    protected $redirectTo = '/user.profile';
 
     /**
      * Create a new controller instance.
@@ -34,7 +34,7 @@ class LoginController extends Controller
      */
     public function redirectTo()
     {
-        return '/user_profile_header'; // Replace with your desired path or route name
+        return 'user-profile'; // Replace with your desired path or route name
     }
 }
 
