@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
@@ -23,8 +24,9 @@ class ListePostsController extends Controller
     {
         $utilisateurs = User::count();
         $postsCount = Post::count();
+        $coursCount = Course::count();
 
-        return view('static_page', compact('utilisateurs', 'postsCount'));
+        return view('static_page', compact('utilisateurs', 'postsCount','coursCount'));
 
     }
 

@@ -13,7 +13,6 @@
                     <th>Username</th>
                     <th>Date de Naissance</th>
                     <th>Sexe</th>
-                    <th>Adresse</th>
                     <th>Mobile</th>
                     <th>Action</th>
                 </tr>
@@ -21,21 +20,22 @@
             <tbody>
                 @forelse($utilisateurs as $utilisateur)
                     <tr>
-                        <td>{{ $utilisateur->id }}</td>
-                        <td>{{ $utilisateur->nom }}</td>
-                        <td>{{ $utilisateur->prenom }}</td>
-                        <td>{{ $utilisateur->username }}</td>
-                        <td>{{ $utilisateur->date_de_naissance }}</td>
-                        <td>{{ $utilisateur->sexe }}</td>
-                        <td>{{ $utilisateur->adresse }}</td>
-                        <td>{{ $utilisateur->mobile }}</td>
-                        <td>
-                            <form action="{{ route('utilisateurs.destroy', ['utilisateur' => $utilisateur->id]) }}" method="post">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
-                            </form>
-                        </td>
+                        @if($utilisateur->role == 0)
+                            <td>{{ $utilisateur->id }}</td>
+                            <td>{{ $utilisateur->nom }}</td>
+                            <td>{{ $utilisateur->prenom }}</td>
+                            <td>{{ $utilisateur->username }}</td>
+                            <td>{{ $utilisateur->date_de_naissance }}</td>
+                            <td>{{ $utilisateur->genre }}</td>
+                            <td>{{ $utilisateur->mobile}}</td>
+                            <td>
+                                <form action="{{ route('utilisateurs.destroy', ['utilisateur' => $utilisateur->id]) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                                </form>
+                            </td>
+                        @endif
                     </tr>
                 @empty
                     <tr>

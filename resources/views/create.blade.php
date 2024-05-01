@@ -10,12 +10,12 @@
 <body class="bg-white-100">
     <div class="mt-4">
         <a href="{{ route('display') }}" class="inline-block bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded transition-all duration-300">
-            Return
+            Retourner
         </a>
     </div>
 
     <div class="container mx-auto p-6">
-        <h2 class="text-2xl font-semibold mb-4">Create Course</h2>
+        <h2 class="text-2xl font-semibold mb-4">Ajouter un cours</h2>
 
         @if(session('success'))
             <p class="text-green-600">{{ session('success') }}</p>
@@ -29,17 +29,17 @@
             @csrf
 
             <div class="mb-4">
-                <label for="title" class="block text-sm font-medium text-gray-600">Title:</label>
+                <label for="title" class="block text-sm font-medium text-gray-600">Titre:</label>
                 <input type="text" name="title" required class="mt-1 p-2 border rounded-md w-full bg-white">
             </div>
 
             <div class="mb-4">
-                <label for="image" class="block text-sm font-medium text-gray-600">Image URL:</label>
+                <label for="image" class="block text-sm font-medium text-gray-600">Image :</label>
                 <input type="file" name="image" required class="mt-1 p-2 border rounded-md w-full bg-white">
             </div>
 
             <div class="mb-4">
-                <label for="sub_description" class="block text-sm font-medium text-gray-600">Sub Description:</label>
+                <label for="sub_description" class="block text-sm font-medium text-gray-600">Sous-description:</label>
                 <textarea name="sub_description" required class="mt-1 p-2 border rounded-md w-full bg-white"></textarea>
             </div>
 
@@ -49,7 +49,7 @@
             </div>
 
             <div class="mb-4">
-                <label for="school" class="block text-sm font-medium text-gray-600">School:</label>
+                <label for="school" class="block text-sm font-medium text-gray-600">&eacute;tablissement :</label>
                 <input type="text" name="school" required class="mt-1 p-2 border rounded-md w-full bg-white">
             </div>
 

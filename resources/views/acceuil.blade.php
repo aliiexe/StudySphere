@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="icon" href="images/study sphere logo.png">
 </head>
 
 <body>
@@ -78,13 +79,13 @@
     
             <div class="counter" data-aos-duration="800" data-aos="fade-up">
                 <div class="cnt">
-                    <p><span id="usersCount">{{ $usersCount }}</span>+<br> users</p>
+                    <p><span id="usersCount">{{ $usersCount }}</span>+<br> utilisateurs</p>
                 </div>
                 <div class="cnt">
                     <p><span id="postsCount">{{ $postsCount }}</span>+<br> posts</p>
                 </div>
                 <div class="cnt">
-                    <p><span id="coursesCount">{{ $coursesCount }}</span>+<br> courses</p>
+                    <p><span id="coursesCount">{{ $coursesCount }}</span>+<br> cours</p>
                 </div>
             </div>
     

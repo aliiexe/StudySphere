@@ -2,24 +2,19 @@
 
 @section('content')
 <div class="container">
-    <h1>Welcome to the Admin Dashboard</h1>
+    <h1 >Bienvenue à l'admin panel</h1>
 
     <!-- Display the user registration chart -->
     <div style="width: 100%; max-width: 800px; margin: auto;">
         <canvas id="userRegistrationChart"></canvas>
     </div>
 
-    <!-- Add other content or charts as needed -->
-
 </div>
-
-<!-- Your footer or script includes go here -->
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     var ctx = document.getElementById('userRegistrationChart').getContext('2d');
 
-    // Utilisation d'AJAX pour récupérer les données depuis le serveur
     fetch('/chart/getUsersRegistrationData')
         .then(response => response.json())
         .then(data => {

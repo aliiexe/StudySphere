@@ -9,7 +9,7 @@
                     <div class="card" style="width: 18rem;">
                         <div class="card-img-top">
                             @if($post->file_path)
-                                <img src="{{ asset($post->file_path) }}" alt="Post Image">
+                                <img src="{{ asset('storage/' . $post->file_path    ) }}" alt="Post Image" width="287px" height="200px">
                             @else
                                 <img src="{{ asset('placeholder.jpg') }}" alt="Placeholder Image">
                             @endif

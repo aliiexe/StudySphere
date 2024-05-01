@@ -32,7 +32,7 @@ class UserProfileController extends Controller
 //     if ($user->profile && $user->profile->photo) {
 //         $photoPath = 'storage/' . $user->profile->photo;
 //     } else {
-//         $photoPath = asset("noprofile.png");
+//         $photoPath = asset("images/noprofil.png");
 //     }
 
 //     return view('user_profile_header', ['user' => $user, 'photoPath' => $photoPath]);

@@ -21,17 +21,28 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="container">
+    <div class="container mt-4">
         <h1>Tous les cours</h1>
-
-        {{-- Loop through all courses and display them --}}
-
-            <div class="card">
+        @forelse ($courses as $course)
+            <div class="card mb-3">
                 <div class="card-body">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                         Dolorem voluptatum suscipit et voluptate blanditiis modi at cupiditate deleniti, sapiente atque odio, natus dignissimos ullam pariatur consequuntur harum laborum beatae aliquam.</p>
+                    <h3 class="card-title">{{ $course->title }}</h3>
+                    <p class="card-text">{{ $course->description }}</p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>School:</strong> {{ $course->school }}</li>
+                        <li class="list-group-item"><strong>Average Rating:</strong> {{ $course->avg_rating }}</li>
+                        <li class="list-group-item"><strong>Domaine:</strong> {{ optional($course->fieldOfStudy)->nom }}</li>
+                        <li class="list-group-item"><strong>Durée du cours:</strong> {{ $course->duree_du_cours }}</li>
+                    </ul>
+                    <form action="{{ route('courses.destroy', $course->id) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger mt-3">Supprimer</button>
+                    </form>
                 </div>
             </div>
-
+        @empty
+            <p>Aucun cours trouvé.</p>
+        @endforelse
     </div>
 @endsection

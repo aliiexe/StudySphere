@@ -175,20 +175,19 @@ body, html {
 
 @media only screen and (max-width: 600px) {
     .maincontainer {
-        display: flex;
         flex-direction: column;
         align-items: center;
     }
 
     .container2 {
-        display: none; /* Hide the image container on smaller screens */
+        display: none;
     }
 
     .container1 {
-        width: 100%; /* Take up full width on smaller screens */
+        width: 100%;
     }
 
-    .container1 .logo {
-        text-align: center; /* Center the logo on smaller screens */
+    .user-box {
+        width: 100%;
     }
 }

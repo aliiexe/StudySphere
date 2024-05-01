@@ -1,21 +1,34 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Profile;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
 
-    public function create($id)
-    {
-        $utilisateur = User::find($id);
-        $profile = $utilisateur->profile;
+    
 
-        return view('profiles.create', compact('utilisateur', 'profile'));
+    public function create($id)
+{
+    $utilisateur = User::find($id);
+
+    if (!$utilisateur) {
+        return redirect()->back()->with('error', 'Utilisateur non trouvé.');
     }
+
+    $profile = $utilisateur->profile;
+
+    $photoPath = $profile ? asset("storage/{$profile->photo}") : asset('images/noprofil.png');
+
+    return view('profiles.create', compact('utilisateur', 'profile', 'photoPath'));
+}
+
+
+
+
 
     public function mettreAJourProfile(Request $request, $id)
 {
@@ -52,11 +65,12 @@ class ProfileController extends Controller
     if ($request->hasFile('photo')) {
         $photoPath = $request->file('photo')->store('photos', 'public');
         $profile->photo = $photoPath;
-}
 
+
+}
 $profile->save();
 
-    return redirect()->route('user.profile', ['id' => $id])->with('success', 'Profil mis à jour avec succès.');
+    return redirect()->route('profile', ['id' => $id])->with('success', 'Profil mis à jour avec succès.');
 }
 
 
@@ -69,13 +83,43 @@ $profile->save();
             $profile = $utilisateur->profile;
 
             if ($profile) {
+                
                 return view('dashboard', compact('utilisateur', 'profile'));
             } else {
+                
                 return view('dashboard', compact('utilisateur'))->with('warning', 'Aucun profil trouvé.');
             }
         } else {
+           
             return redirect()->route('login');
         }
     }
+
+
+
+
+
+public function showProfile()
+{
+    $utilisateur = auth()->user();
+    $user = Auth::user();
+
+        $photoPath = $user->profile && $user->profile->photo
+            ? 'storage/' . $user->profile->photo
+            : asset("images/noprofil.png");
+
+    if ($utilisateur) {
+        $profile = $utilisateur->profile;
+
+        
+        return $profile
+            ? view('profile', compact('utilisateur', 'profile','user','photoPath'))
+            : view('profile', compact('utilisateur','user','photoPath'));
+    }
+
+    return redirect()->route('login');
+}
+
+
 
 }

@@ -10,7 +10,7 @@
     <script src="https://code.jquery.com/jquery-3.6.2.min.js"></script>
 
     <style>
-        
+
         .custom-container {
         max-width: 1200px;
          margin: 0 auto;
@@ -42,7 +42,7 @@
 
     </style>
 
-        <script>
+        {{-- <script>
             $(document).ready(function () {
                 $('#profileForm').submit(function (event) {
                     var mobileValue = $('input[name="mobile"]').val();
@@ -53,13 +53,13 @@
                     }
                 });
             });
-        </script>
+        </script> --}}
 
 
 </head>
 
 <body class="mt-5">
-        <div class="custom-container light-style flex-grow-1 container-p-y mb-4">
+                <div class="custom-container light-style flex-grow-1 container-p-y mb-4">
         <img src="" alt="">
             <div class="card custom-card  ">
                 <div class="row no-gutters  row-bordered row-border-light">
@@ -69,16 +69,16 @@
                             Profile Info</a>
                     </div>
                     <div class="list-group-item border-0">
-                        <img src="{{ asset('images/noprofil.png') }}" alt="Profile Image" class="img-fluid" width="100" height="100">
+                        <img src="{{ asset('images/ss.png') }}" alt="Profile Image" class="img-fluid" width="200" height="100">
                     </div>
                 </div>
                 <div class="col-md-9">
-                    <div class="tab-content">
+                    <div class="tab-content ml-3">
                         <div class="tab-pane fade active show" id="account-general">
                             <form id="profileForm" action="{{ route('profiles.mettre-a-jour', ['id' => $utilisateur->id]) }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
-                                <div class="upload mb-3">
+                                {{-- <div class="upload mb-3">
                                     @if ($utilisateur->photo)
                                         <img id="profileImage" src="{{ asset('images/noprofil.png') }}" width="100" height="100" alt="Profile Photo" class="rounded-circle">
                                     @else
@@ -88,7 +88,18 @@
                                         <input type="file" name="photo" id="photoInput" class="d-none">
                                         <label for="photoInput" class="btn custom-btn-primary"><i class="fas fa-camera"></i> Change Photo</label>
                                     </div>
+                                </div> --}}
+
+
+                                <div class="upload mb-3">
+                                    <img id="profileImage" src="{{ $photoPath }}" width="100" height="100" alt="Profile Photo" class="mb-4 rounded-circle">
+                                    <div class="round">
+                                        <input type="file" name="photo" id="photoInput" class="d-none">
+                                        <label for="photoInput" class="btn custom-btn-primary"><i class="fas fa-camera"></i> Change Photo</label>
+                                    </div>
                                 </div>
+
+
                                 <div class="form row">
                                     <div class="form-group col-6  ">
                                         <label class="form-label">Nom</label>
@@ -110,7 +121,7 @@
                                     <div class="form-group col-6  ">
                                         <label class="form-label">Bio</label>
                                         <input type="text" class="form-control"
-                                        value="{{ optional($utilisateur->profile)->bio }}" name="bio" required>
+                                        value="{{ optional($utilisateur->profile)->bio }}" name="bio" >
                                     </div>
 
                                     <div class="form-group col-6  ">
@@ -122,26 +133,27 @@
                                     <div class="form-group col-6  ">
                                         <label class="form-label">Genre:</label>
                                         <select class="form-control" name="genre">
-                                            <option value="homme" {{ ($utilisateur->genre == 'homme') ? 'selected' : '' }}>Homme</option>
-                                            <option value="femme" {{ ($utilisateur->genre == 'femme') ? 'selected' : '' }}>Femme</option>
+                                            <option value="Male" {{ ($utilisateur->genre == 'Male') ? 'selected' : '' }}>Male</option>
+                                            <option value="female" {{ ($utilisateur->genre == 'female') ? 'selected' : '' }}>Female</option>
                                         </select>
                                     </div>
 
                                     <div class="form-group col-6  ">
                                         <label class="form-label">Adresse</label>
                                         <input type="text" class="form-control"
-                                            value="{{ $utilisateur->adresse ?? '' }}" name="adresse" required>
+                                            value="{{ $utilisateur->adresse ?? '' }}" name="adresse" >
                                     </div>
 
                                     <div class="form-group col-6   ">
                                         <label class="form-label">Mobile</label>
                                         <input type="text" class="form-control"
-                                            value="{{ $utilisateur->mobile ?? '' }}" name="mobile" required>
+                                            value="{{ $utilisateur->mobile ?? '' }}" name="mobile" >
                                             <span id="mobileError" class="error-message text-danger"></span>                                    </div>
                                 </div>
                                 <div class="text-right mb-3">
                                     <button type="submit" class="btn custom-btn-primary">Modifier le profil</button>
-                                    <button type="reset" class="btn custom-btn-secondary">Annuler</button>
+                                    {{-- <button type="reset" class="btn custom-btn-secondary" >Annuler</button> --}}
+                                    <button type="button" onclick="window.location='{{ route('profile') }}'" class="btn custom-btn-secondary">Annuler</button>
                                 </div>
                             </form>
                         </div>
@@ -152,6 +164,12 @@
     </div>
     <script src="{{ asset('js/image.js') }}"></script>
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    {{-- <script>
+        function annulerRedirection() {
+            window.location.href = "{{ ('profile') }}";
+        }
+    </script> --}}
+
 </body>
 
 </html>

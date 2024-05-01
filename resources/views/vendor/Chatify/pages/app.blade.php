@@ -5,7 +5,7 @@
         {{-- Header and search bar --}}
         <div class="m-header">
             <nav>
-                <a href="{{route("user.profile")}}"><i class="fas fa-inbox"></i> <span class="messenger-headTitle">Retourner</span> </a>
+                <a href="{{route("feed")}}"><i class="fas fa-inbox"></i> <span class="messenger-headTitle">Retourner</span> </a>
                 {{-- header buttons --}}
                 <nav class="m-header-right">
                     <a href="#"><i class="fas fa-cog settings-btn"></i></a>

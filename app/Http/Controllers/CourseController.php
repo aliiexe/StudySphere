@@ -24,7 +24,7 @@ class CourseController extends Controller
 
     $photoPath = $user->profile && $user->profile->photo
         ? 'storage/' . $user->profile->photo
-        : asset("images/noprofile.png");
+        : asset("images/noprofil.png");
 
     return view('display', compact('courses', 'fieldsOfStudy', 'user', 'photoPath'));
 }
@@ -44,7 +44,7 @@ class CourseController extends Controller
 
     $photoPath = $user->profile && $user->profile->photo
         ? 'storage/' . $user->profile->photo
-        : asset("images/noprofile.png");
+        : asset("images/noprofil.png");
 
         return view('display', compact('courses', 'fieldsOfStudy', 'user', 'photoPath'));
     }
@@ -201,6 +201,25 @@ public function store(Request $request)
         return redirect()->route('create')->with('error', 'Failed to create course.');
     }
 }
+
+public function admincourse()
+{
+    $courses = Course::with('fieldOfStudy')->get();
+
+    return view('liste_courses', compact('courses'));
+}
+
+public function destroy($id)
+    {
+        $course = Course::find($id);
+
+        if ($course) {
+            $course->delete();
+            return redirect()->route('liste_courses')->with('success', 'Post supprimé avec succès.');
+        } else {
+            return redirect()->route('liste_courses')->with('error', 'Post non trouvé.');
+        }
+    }
 
 
 

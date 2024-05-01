@@ -80,16 +80,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course Listing</title>
+    <title>Cours</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="font-sans bg-gray-100">
     
     <div class="container mx-auto p-8">
-    <h2 class="text-3xl text-center text-blue-500 mb-8">Course Listing</h2>
     @if($user->role == 1)
             <a href="{{ route('create') }}" class="bg-blue-500 text-white py-2 px-4 rounded inline-block mb-4 hover:bg-blue-700 transition-all duration-300">
-                Add a Course
+               Ajouter un cours
             </a>
     @endif
 
@@ -121,7 +120,7 @@
                 <label for="field_of_study" class="sr-only">Filter by Field of Study:</label>
                 <select name="field_of_study" id="field_of_study" class="block w-full md:w-auto p-2 mb-2 md:mb-0 text-sm text-gray-900 bg-gray-50 focus:outline-none focus:border-blue-500 transition-all duration-300 dark:bg-gray-700 dark:text-white dark:focus:border-blue-500" onchange="this.form.submit()">
                     <option value="" {{ request('field_of_study') === '' ? 'selected' : '' }}>
-                        All Fields
+                        Tout
                     </option>
                     @foreach($fieldsOfStudy as $field)
                         <option value="{{ $field->id }}" {{ request('field_of_study') == $field->id ? 'selected' : '' }}>
@@ -129,7 +128,7 @@
                         </option>
                     @endforeach
                 </select>
-                <label for="search-dropdown" class="sr-only">Search by Title:</label>
+                <label for="search-dropdown" class="sr-only">Rechercher par titre:</label>
                 <div class="relative flex-1">
                     <svg class="absolute top-0 left-0 m-2.5 w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-5-5m2-5a7 7 0 10-14 0 7 7 0 0014 0z"></path>

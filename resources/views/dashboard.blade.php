@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1>Welcome to the Admin Dashboard</h1>
+    <h1>Bienvenue à l'admin panel</h1>
 
     <!-- Display the user registration chart -->
     <div style="width: 100%; max-width: 800px; margin: auto;">

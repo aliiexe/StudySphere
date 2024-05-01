@@ -52,7 +52,7 @@
             <img src="{{ asset("images/study sphere logo.png") }}" alt="Study sphere logo">
         </div>
         <div class="titles">
-            <h1>Get started with <br/>Study sphere</h1>
+            <h1>Commencez avec  <br/>Study sphere</h1>
         </div>
         <div>
             <form method="POST" action="{{ route('register.step1') }}" target="_self">
@@ -98,6 +98,11 @@
                 </div>
                 <div class="btn">
                     <button type="submit">Suivant</button>
+                </div>
+                <div>
+                    <div class="btn">
+                        <p>Vous avez déja un compte ? <a class="signup-link" href="{{ route('login') }}">Log in</a></p>
+                    </div>
                 </div>
             </form>
         </div>
